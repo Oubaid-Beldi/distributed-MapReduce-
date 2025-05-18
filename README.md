@@ -49,26 +49,20 @@ Run the Master
 Start the master with input files (e.g., input1.txt, input2.txt):
 go run main.go master input1.txt input2.txt
 
-
-The master listens on :1234 (RPC) and :8080 (HTTP dashboard).
-It coordinates tasks and writes the top 5 words to mr-final.txt.
-
+The master listens on :1234 (RPC) and :8080 (HTTP dashboard). It coordinates tasks and writes the top 5 words to mr-final.txt.
 Run Workers
 In separate terminals, start 2-3 workers:
 go run main.go worker localhost:1234
 
 Workers execute map and reduce tasks, with a 5% chance of crashing and 10% chance of delay (0-5s).
 View the Dashboard
+Open http://localhost:8080 in a browser. The dashboard displays:
 
-Open http://localhost:8080 in a browser.
-The dashboard displays:
 Task Table: Task ID, type (map/reduce), status (idle/in-progress/done).
 Worker Table: Worker ID, number of tasks assigned.
 Progress Bar: Job completion percentage (0-100%).
 
-
 Updates every second via the /data endpoint.
-
 Check Output
 After completion, view mr-final.txt:
 cat mr-final.txt
