@@ -21,14 +21,12 @@ PDIST25-ETUDIANT1-ETUDIANT2/
 ├── README.md           # This file
 
 Setup Instructions
-
-Prerequisites:
+Prerequisites
 
 Install Go (version 1.16 or later): golang.org
 Ensure a modern web browser (e.g., Chrome, Firefox) for the dashboard.
 
-
-Clone the Project:
+Clone the Project
 
 Copy the project directory PDIST25-ETUDIANT1-ETUDIANT2/ to your machine.
 Alternatively, initialize as a Git repository (optional):git clone <repository-url>
@@ -36,42 +34,31 @@ cd PDIST25-ETUDIANT1-ETUDIANT2
 
 
 
-
-Verify Files:
+Verify Files
 
 Ensure input1.txt and input2.txt exist in the root directory.
 Confirm web/index.html and web/script.js are in the web/ directory.
 
-
-
 Usage
 The system consists of a master, multiple workers, and a web dashboard.
+Clean Up Old Files
+Remove previous intermediate and output files:
+rm -f mr-* mr-out-* mr-final.txt
 
-Clean Up Old Files:
-
-Remove previous intermediate and output files:rm -f mr-* mr-out-* mr-final.txt
-
-
-
-
-Run the Master:
-
-Start the master with input files (e.g., input1.txt, input2.txt):go run main.go master input1.txt input2.txt
+Run the Master
+Start the master with input files (e.g., input1.txt, input2.txt):
+go run main.go master input1.txt input2.txt
 
 
 The master listens on :1234 (RPC) and :8080 (HTTP dashboard).
 It coordinates tasks and writes the top 5 words to mr-final.txt.
 
-
-Run Workers:
-
-In separate terminals, start 2-3 workers:go run main.go worker localhost:1234
-
+Run Workers
+In separate terminals, start 2-3 workers:
+go run main.go worker localhost:1234
 
 Workers execute map and reduce tasks, with a 5% chance of crashing and 10% chance of delay (0-5s).
-
-
-View the Dashboard:
+View the Dashboard
 
 Open http://localhost:8080 in a browser.
 The dashboard displays:
@@ -82,24 +69,16 @@ Progress Bar: Job completion percentage (0-100%).
 
 Updates every second via the /data endpoint.
 
+Check Output
+After completion, view mr-final.txt:
+cat mr-final.txt
 
-Check Output:
-
-After completion, view mr-final.txt:cat mr-final.txt
-
-
-Expected output for sample inputs:hello: 3
+Expected output for sample inputs:
+hello: 3
 test: 3
 world: 3
 a: 1
 goodbye: 1
 
-
-
-
-Stop the System:
-
+Stop the System
 Press Ctrl+C in the master terminal to shut down (workers exit automatically).
-
-
-
